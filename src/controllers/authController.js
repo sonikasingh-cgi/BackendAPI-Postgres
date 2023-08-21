@@ -31,8 +31,8 @@ const authController = {
   async signin(req, res) {
     try {
       console.log('POST /signin request received')
-      const { username, password } = req.body;
-      const user = await User.findByUsername(username);
+      const { email, password } = req.body;
+      const user = await User.findByEmail(email);
 
       if (!user || !bcrypt.compareSync(password, user.password)) {
         return res.status(401).json({ error: 'Invalid username or password' });
@@ -41,7 +41,7 @@ const authController = {
       const token = createToken(user);
       console.log('signing attempt successful');
       res.status(200).json({ 
-        "message":"ok",
+        "username": user.username,
         token
     });
     } catch (error) {
