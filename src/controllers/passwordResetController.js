@@ -36,7 +36,7 @@ const passwordResetController = {
       });
 
       const mailOptions = {
-        from: 'devapp2023@outlook.de',
+        from: process.env.EMAIL_USERNAME,
         to: email,
         subject: 'Password Reset OTP',
         text: `Your OTP for password reset is: ${otp}`,
